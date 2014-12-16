@@ -1,0 +1,7 @@
+{
+  "name": "leapi",
+  "description": "Animazione sulle API",
+  "repository": "https://github.com/chiodonia/leapi",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["api"]
+}

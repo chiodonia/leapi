@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" manifest="/manifest">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
+	<title>Le api</title>
+<style>
+
+    body {
+        width: 104px;
+        width: 768px;
+        margin: 0px;
+        background-color: black;
+    }
+    
+	.full-screen {
+        position: absolute;
+        width: 768px; 
+        height: 1024px;
+        z-index: 10;
+    }
+
+	#button1 {
+        position:absolute;
+        left:10px;
+        top:200px;
+        width: 104px;
+        height: 90px;
+	}
+
+    #button2 {
+        position:absolute;
+        left:120px;
+        top:150px;
+        width: 104px;
+        height: 90px;
+	}
+
+    #button3 {
+        position:absolute;
+        left:230px;
+        top:100px;
+        width: 104px;
+        height: 90px;
+	}
+
+    #button4 {
+        position:absolute;
+        left:340px;
+        top:50px;
+        width: 104px;
+        height: 90px;
+	}
+
+    #button5 {
+        position:absolute;
+        left:450px;
+        top:100px;
+        width: 104px;
+        height: 90px;
+	}
+
+    #button6 {
+        position:absolute;
+        left:560px;
+        top:150px;
+        width: 104px;
+        height: 90px;
+	}
+
+    #button7 {
+        position:absolute;
+        left:670px;
+        top:200px;
+        width: 104px;
+        height: 90px;
+	}
+
+	#buttonhome {
+        position:absolute;
+        left:10px;
+        top:10px;
+        width: 52px;
+        height: 52px;
+	}
+
+	#buttontutorial {
+        position:absolute;
+        left:654px;
+        top:10px;
+        width: 52px;
+        height: 52px;
+	}
+
+	video {
+        position: absolute; 
+        width: 768px; 
+        height: 1024px;
+        background-size: cover;
+        z-index: -100;
+	}
+    
+</style>
+</head>
+<body>
+	<div id="container"></div>
+	<div id="video"></div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.touchSwipe.min.js"></script>
+	<script>
+
+		$(function() {
+
+            var step = 1;
+            
+            function home() {
+                undisplayVideo()
+                $('#container').html("<img id='home' src='img/home.png' class='full-screen'>");
+//                $('#home').bind('click', function(event) {
+//                    tutorial(1);
+//				});
+                $("#home").swipe( {
+					  swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+                        tutorial(1);
+					  },
+					  threshold:0,
+					  fingers:'all'
+				});
+            }
+
+            function undisplayVideo() {
+                $('#video').html("");
+            }
+
+            function displayVideo(v, loop) {
+                var options = "";
+                if (loop) {
+                    options = "loop";
+                }
+                var html = "<video id='thevideo' preload='true' "+options+">" +
+                        "<source src='video/video_"+v+".mp4' type='video/mp4'>" +
+                        "Your browser does not support the video tag." +
+                    "</video>";
+                $('#video').html(html);
+				$('#thevideo').bind('load', function() {
+					playVideo();
+				});
+				$('#thevideo').bind('canplay', function() {
+					playVideo();
+				});
+				$('#thevideo').bind('canplaythrough', function() {
+					playVideo();
+				});
+				setTimeout(function() {
+					playVideo();
+				}, 1000);                
+            }
+            
+            function playVideo() {
+                $('#thevideo').get(0).play();
+            }
+            
+            function pauseVideo() {
+                $('#thevideo').get(0).pause();
+            }
+            
+            function tutorial(i) {
+                step = i;
+                if (i==1) {
+                    $('#container').html("<img id='tutorial' src='img/tuto_"+i+".png' class='full-screen'>");
+                } else {
+                    $('#tutorial').attr('src', 'img/tuto_'+i+'.png');
+                }
+                $("#tutorial").swipe({
+						swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+                            if (step<6) {
+                                tutorial(step+1);
+                            } else {
+                                start();
+                            }
+						},
+					   threshold:0
+				});
+//                $('#tutorial').bind('click', function(event) {
+//                    next(i);
+//                });
+                if (i>5) {
+                    displayVideo(0, true);
+                } 
+            }
+
+		 	function disableButton(b) {
+				$('#button'+b).attr('src', 'img/bu_'+b+'_off.png');
+				$('#button'+b).unbind('click');
+		 	}
+
+		 	function disableAllButtons() {
+				for (var i = 1; i <= 7; i++) {
+					disableButton(i);
+				}
+		 	}
+
+		 	function disableButtonsExcept(b) {
+		 		disableAllButtons();
+				$('#button'+b).attr('src', 'img/bu_'+b+'_on.png');
+		 	}
+
+            function enableButton(b) {
+                $('#container').append("<img id='button" + b + "' src='img/bu_" + b + "_on.png'>");
+                $('#button'+b).bind('click', function(event) {
+                    play(b);
+                });
+		 	}
+
+		 	function start() {
+                displayVideo(0, true);
+                $('#container').html("<img id='buttonhome' src='img/bu_home.png'>");
+                $('#container').append("<img id='buttontutorial' src='img/bu_tutorial.png'>");
+                $('#buttonhome').bind("click", function() {
+                    home();
+                });
+                $('#buttontutorial').bind("click", function() {
+                    tutorial(1);
+                });
+				for (var i = 1; i <= 7; i++) {
+                    enableButton(i);
+				}
+		 	}
+
+		 	function play(v) {
+		 		disableButtonsExcept(v);
+                displayVideo(v);
+				$('#thevideo').bind("ended", function() {
+//                    $('#thevideo').bind("click", function() {
+//                        start();
+//                    });
+                    $("#thevideo").swipe( {
+                          swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+                            start();
+                          },
+                          threshold:0,
+                          fingers:'all'
+                    });
+				});
+		 	}
+
+		 	home();
+
+		});
+
+	</script>
+</body>
+</html>
