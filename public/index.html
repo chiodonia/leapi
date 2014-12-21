@@ -17,10 +17,10 @@
         margin: 0px;
         background-color: black;
     }
-    
+
 	.full-screen {
         position: absolute;
-        width: 768px; 
+        width: 768px;
         height: 1024px;
         z-index: 10;
     }
@@ -98,13 +98,13 @@
 	}
 
 	video {
-        position: absolute; 
-        width: 768px; 
+        position: absolute;
+        width: 768px;
         height: 1024px;
         background-size: cover;
         z-index: -100;
 	}
-    
+
 </style>
 </head>
 <body>
@@ -117,20 +117,22 @@
 		$(function() {
 
             var step = 1;
-            
+
             function home() {
                 undisplayVideo()
-                $('#container').html("<img id='home' src='img/home.png' class='full-screen'>");
-//                $('#home').bind('click', function(event) {
-//                    tutorial(1);
-//				});
-                $("#home").swipe( {
-					  swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-                        tutorial(1);
-					  },
-					  threshold:0,
-					  fingers:'all'
-				});
+                $('#container').fadeOut(300, function() {
+                    $('#container').html("<img id='home' src='img/home.png' class='full-screen'>");
+                    $("#home").swipe( {
+                    swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+                            tutorial(1);
+                    },
+                    threshold:0,
+                    fingers:'all'
+                    });
+                    //  $('#home').bind('click', function(event) {
+                    //  tutorial(1);
+                    //	});
+                }).fadeIn(300);
             }
 
             function undisplayVideo() {
@@ -158,40 +160,42 @@
 				});
 				setTimeout(function() {
 					playVideo();
-				}, 1000);                
+				}, 1000);
             }
-            
+
             function playVideo() {
                 $('#thevideo').get(0).play();
             }
-            
+
             function pauseVideo() {
                 $('#thevideo').get(0).pause();
             }
-            
+
             function tutorial(i) {
                 step = i;
-                if (i==1) {
-                    $('#container').html("<img id='tutorial' src='img/tuto_"+i+".png' class='full-screen'>");
-                } else {
-                    $('#tutorial').attr('src', 'img/tuto_'+i+'.png');
-                }
-                $("#tutorial").swipe({
-						swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-                            if (step<6) {
-                                tutorial(step+1);
-                            } else {
-                                start();
-                            }
-						},
-					   threshold:0
-				});
-//                $('#tutorial').bind('click', function(event) {
-//                    next(i);
-//                });
-                if (i>5) {
-                    displayVideo(0, true);
-                } 
+                $('#container').fadeOut(300, function() {
+                  if (i==1) {
+                      $('#container').html("<img id='tutorial' src='img/tuto_"+i+".png' class='full-screen'>");
+                  } else {
+                      $('#tutorial').attr('src', 'img/tuto_'+i+'.png');
+                  }
+                  $("#tutorial").swipe({
+  						swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+                              if (step<6) {
+                                  tutorial(step+1);
+                              } else {
+                                  start();
+                              }
+  						},
+  					   threshold:0
+  				});
+  //                $('#tutorial').bind('click', function(event) {
+  //                    next(i);
+  //                });
+                  if (i>5) {
+                      displayVideo(0, true);
+                  }
+              }).fadeIn(300);
             }
 
 		 	function disableButton(b) {
@@ -218,18 +222,20 @@
 		 	}
 
 		 	function start() {
-                displayVideo(0, true);
-                $('#container').html("<img id='buttonhome' src='img/bu_home.png'>");
-                $('#container').append("<img id='buttontutorial' src='img/bu_tutorial.png'>");
-                $('#buttonhome').bind("click", function() {
-                    home();
-                });
-                $('#buttontutorial').bind("click", function() {
-                    tutorial(1);
-                });
-				for (var i = 1; i <= 7; i++) {
-                    enableButton(i);
-				}
+         $('#container').fadeOut(1000, function() {
+                  displayVideo(0, true);
+                  $('#container').html("<img id='buttonhome' src='img/bu_home.png'>");
+                  $('#container').append("<img id='buttontutorial' src='img/bu_tutorial.png'>");
+                  $('#buttonhome').bind("click", function() {
+                      home();
+                  });
+                  $('#buttontutorial').bind("click", function() {
+                      tutorial(1);
+                  });
+  				for (var i = 1; i <= 7; i++) {
+                      enableButton(i);
+  				}
+        }).fadeIn(1000);
 		 	}
 
 		 	function play(v) {
