@@ -139,10 +139,13 @@
                 $('#video').html("");
             }
 
-            function displayVideo(v, loop) {
+            function displayVideo(v, loop, muted) {
                 var options = "";
                 if (loop) {
-                    options = "loop";
+                    options = " loop ";
+                }
+                if (muted) {
+                    options = options + " muted ";
                 }
                 var html = "<video id='thevideo' preload='true' "+options+">" +
                         "<source src='video/video_"+v+".mp4' type='video/mp4'>" +
@@ -193,7 +196,7 @@
   //                    next(i);
   //                });
                   if (i>5) {
-                      displayVideo(0, true);
+                      displayVideo(0, true, true);
                   }
               }).fadeIn(300);
             }
@@ -223,7 +226,7 @@
 
 		 	function start() {
          $('#container').fadeOut(1000, function() {
-                  displayVideo(0, true);
+                  displayVideo(0, true, true);
                   $('#container').html("<img id='buttonhome' src='img/bu_home.png'>");
                   $('#container').append("<img id='buttontutorial' src='img/bu_tutorial.png'>");
                   $('#buttonhome').bind("click", function() {
@@ -240,7 +243,7 @@
 
 		 	function play(v) {
 		 		disableButtonsExcept(v);
-                displayVideo(v);
+                displayVideo(v, false, false);
 				$('#thevideo').bind("ended", function() {
 //                    $('#thevideo').bind("click", function() {
 //                        start();
