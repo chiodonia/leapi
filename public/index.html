@@ -114,6 +114,13 @@
     <script src="js/jquery.touchSwipe.min.js"></script>
 	<script>
 
+    setTimeout(function() {
+      // Already scrolled?
+      if(window.pageYOffset !== 0) return;
+
+      window.scrollTo(0, window.pageYOffset + 1);
+    }, 1);
+
 		$(function() {
 
             var step = 1;
