@@ -106,6 +106,8 @@
     // Black base color for background matches the native apps
     theWebView.backgroundColor = [UIColor blackColor];
     theWebView.scrollView.bounces = NO;
+    theWebView.allowsInlineMediaPlayback = YES;
+    theWebView.mediaPlaybackRequiresUserAction = NO;
     return [super webViewDidFinishLoad:theWebView];
 }
 

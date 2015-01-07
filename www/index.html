@@ -112,7 +112,7 @@
 
 </style>
 </head>
-<body>
+<body onload="onLoad()">
 	<div id="container"></div>
 	<div id="videos"></div>
     <script type="text/javascript" src="cordova.js"></script>
@@ -129,20 +129,6 @@
 
             var step = 1;
 
-            function setUp() {
-                var html = "<video id='video0' preload='true' autoplay loop>" +
-                            "<source src='video/video_0.mp4' type='video/mp4'>" +
-                            "Your browser does not support the video tag." +
-                            "</video>"
-                for (var v=1; v<8; v++) {
-                    html = html + "<video id='video"+v+"' preload='true' autoplay>" +
-                            "<source src='video/video_"+v+".mp4' type='video/mp4'>" +
-                            "Your browser does not support the video tag." +
-                            "</video>";
-                }
-                $('#videos').html(html);
-            }
-            
             function home() {
                 $('body').removeClass("hell-background");
                 hideVideos();
@@ -151,34 +137,25 @@
                     tutorial(1);
                 });
             }
-
+        
             function hideVideos() {
-                for (var v=0; v<8; v++) {
-                    $('#video'+v).get(0).pause();
-                    $('#video'+v).hide();
-                    $('#video'+v).get(0).currentTime=0;
-                }
+                $('#videos').html("");
             }
             
             function displayVideo(i) {
-                for (var v=0; v<8; v++) {
-                    if (v==i) {
-                        setTimeout(function() {
-//                            $('#video'+i).get(0).currentTime=0;
-                            $('#video'+i).show();
-                            $('#video'+i).get(0).play();
-                            $('#video'+i).bind("ended", function() {
-                                $('#video'+i).hammer().bind('tap', function(event) {
-                                    start();
-                                });
-                            });
-                        }, 10);
-                    } else {
-                        $('#video'+v).hide();         
-                        $('#video'+v).get(0).pause();
-                        $('#video'+v).get(0).currentTime=0;
-                    }
-                }
+                var options = "autoplay preload='true'";
+                if (i==0) {
+                    options = options + " loop ";
+                } 
+                var html = "<video id='video"+i+"'" + options + ">" +
+                        "<source src='video/video_"+i+".mp4' type='video/mp4'>" +
+                        "Your browser does not support the video tag." +
+                        "</video>";
+                $('#videos').html(html);
+
+                $('#video'+i).hammer().bind('tap', function(event) {
+                    start(true);
+                });
             }
 
             function tutorial(i) {
@@ -194,7 +171,7 @@
                       if (step<6) {
                           tutorial(i+1);
                       } else {
-                          start();
+                          start(false);
                       }
                   });
                   if (step>5) {
@@ -212,8 +189,7 @@
 		 	}
 
             function enableButtons() {
-                var html = "<img id='buttonhome' src='img/bu_home.png'>";
-                html = html + "<img id='buttontutorial' src='img/bu_tutorial.png'>";
+                var html = "<img id='buttonhome' src='img/bu_home.png'><img id='buttontutorial' src='img/bu_tutorial.png'>";
                 for (var b = 1; b <= 7; b++) {
                     html = html + "<img id='button" + b + "' src='img/bu_" + b + "_on.png'>";
                 }
@@ -234,13 +210,14 @@
                 }
 		 	}
 
-		 	function start() {
+		 	function start(video0) {
                 $('body').addClass("hell-background");
-                 displayVideo(0);
-                 enableButtons();
+                enableButtons();
+                if (video0) {
+                    displayVideo(0);
+                }
 		 	}
 
-            setUp();
             home();
 
 		});
