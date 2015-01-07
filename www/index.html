@@ -112,9 +112,11 @@
 
 </style>
 </head>
-<body onload="onLoad()">
-	<div id="container"></div>
-	<div id="videos"></div>
+<body>
+    <div id="page">
+        <div id="container"></div>
+        <div id="videos"></div>
+    </div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
@@ -130,53 +132,62 @@
             var step = 1;
 
             function home() {
+                $('#page').hide();
                 $('body').removeClass("hell-background");
                 hideVideos();
                 $('#container').html("<img id='home' src='img/home.png' class='full-screen'>");
                 $('#home').hammer().bind('tap', function(event) {
-                    tutorial(1);
+                    startTutorial();
                 });
+                $('#page').fadeIn('fast');
             }
         
             function hideVideos() {
                 $('#videos').html("");
             }
             
-            function displayVideo(i) {
+            function displayVideo(v) {
                 var options = "autoplay preload='true'";
-                if (i==0) {
+                if (v==0) {
                     options = options + " loop ";
                 } 
-                var html = "<video id='video"+i+"'" + options + ">" +
-                        "<source src='video/video_"+i+".mp4' type='video/mp4'>" +
+                var html = "<video id='video"+v+"'" + options + ">" +
+                        "<source src='video/video_"+v+".mp4' type='video/mp4'>" +
                         "Your browser does not support the video tag." +
                         "</video>";
                 $('#videos').html(html);
 
-                $('#video'+i).hammer().bind('tap', function(event) {
-                    start(true);
-                });
+                if (v>0) {
+                    $('#video'+v).bind("ended", function() {
+                        $('#video'+v).hammer().bind('tap', function(event) {
+                            start(true);
+                        });
+                    });                    
+                }
             }
 
-            function tutorial(i) {
-                  step = i;
-                  if (step==1) {
+            function tutorial() {
+                $('#page').hide();
+                if (step==1) {
                       $('body').removeClass("hell-background");
                       hideVideos();
                       $('#container').html("<img id='tutorial' src='img/tuto_"+step+".png' class='full-screen'>");
-                  } else {
+                } else {
                       $('#tutorial').attr('src', 'img/tuto_'+step+'.png');
-                  }
-                  $('#tutorial').hammer().bind('tap', function(event) {
+                }
+                $('#tutorial').hammer().unbind('tap');
+                $('#tutorial').hammer().bind('tap', function(event) {
                       if (step<6) {
-                          tutorial(i+1);
+                          step = step + 1;
+                          tutorial();
                       } else {
                           start(false);
                       }
-                  });
-                  if (step>5) {
+                });
+                if (step>5) {
                       displayVideo(0);
-                  } 
+                } 
+                $('#page').fadeIn('fast');
             }
 
 		 	function disableButtonsExcept(b) {
@@ -188,6 +199,11 @@
 				}
 		 	}
 
+            function startTutorial() {
+                  step = 1;
+                  tutorial();
+            }
+            
             function enableButtons() {
                 var html = "<img id='buttonhome' src='img/bu_home.png'><img id='buttontutorial' src='img/bu_tutorial.png'>";
                 for (var b = 1; b <= 7; b++) {
@@ -198,24 +214,36 @@
                       home();
                 });
                 $('#buttontutorial').bind("click", function() {
-                      tutorial(1);
+                      startTutorial();
                 });
                 for (var b = 1; b <= 7; b++) {
                     (function(index) {
                             $('#button'+index).bind('click', function(event) {
-                                disableButtonsExcept(index);
-                                displayVideo(index);
+                                startVideo(index);
                             });
                      })(b);                    
                 }
 		 	}
 
+            function startVideo(v) {
+                $('#page').fadeOut('fast', function() {
+                    $('#page').hide();
+                    disableButtonsExcept(v);
+                    displayVideo(v);
+                });
+                $('#page').fadeIn('fast');                                
+            }
+            
 		 	function start(video0) {
-                $('body').addClass("hell-background");
-                enableButtons();
-                if (video0) {
-                    displayVideo(0);
-                }
+                $('#page').fadeOut('fast', function() {
+                    $('#page').hide();
+                    $('body').addClass("hell-background");
+                    if (video0) {
+                        displayVideo(0);
+                    }
+                    enableButtons();
+                });
+                $('#page').fadeIn('fast');                                
 		 	}
 
             home();
