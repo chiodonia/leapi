@@ -268,11 +268,11 @@
 
             var step = 1;
 
-            $('#home').on('touchstart click', function() {
+            $('#home').on('click', function() {
                 startTutorial();
             });
             
-            $('#tutorial').on('touchstart click', function() {
+            $('#tutorial').on('click', function() {
                 step++;
                 tutorial(step);
             });
@@ -359,7 +359,7 @@
                         "</video>";
                 $('#video').html(html);
                 $('#video video').bind("ended", function() {
-                    $('#video video').bind('touchstart click', function(event) {
+                    $('#video video').bind('click', function(event) {
                         startMainPage(true);
                     });
                 });                    

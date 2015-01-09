@@ -9,6 +9,11 @@
                 "parents": {
                     "/*": []
                 }
+            },
+            "framework": {
+                "parents": {
+                    "CoreGraphics.framework": []
+                }
             }
         }
     },

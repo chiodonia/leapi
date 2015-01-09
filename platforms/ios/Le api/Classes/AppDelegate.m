@@ -43,7 +43,7 @@
 
     [cookieStorage setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
 
-    int cacheSizeMemory = 8 * 1024 * 1024; // 8MB
+    int cacheSizeMemory = 20 * 1024 * 1024; // 8MB
     int cacheSizeDisk = 32 * 1024 * 1024; // 32MB
 #if __has_feature(objc_arc)
         NSURLCache* sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:cacheSizeMemory diskCapacity:cacheSizeDisk diskPath:@"nsurlcache"];

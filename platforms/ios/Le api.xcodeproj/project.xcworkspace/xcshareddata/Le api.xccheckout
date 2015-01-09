@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6A84952F-3E06-4826-AB61-E7921A00BE7E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Le api</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>90C1D46106796ECAD92D838FFCA332B62A9353E5</key>
+		<string>https://github.com/chiodonia/leapi.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>platforms/ios/Le api.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>90C1D46106796ECAD92D838FFCA332B62A9353E5</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/chiodonia/leapi.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>90C1D46106796ECAD92D838FFCA332B62A9353E5</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>90C1D46106796ECAD92D838FFCA332B62A9353E5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>leapi</string>
+		</dict>
+	</array>
+</dict>
+</plist>

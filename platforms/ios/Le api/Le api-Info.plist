@@ -66,6 +66,8 @@
     <true/>
     <key>NSMainNibFile</key>
     <string></string>
+    <key>UIApplicationExitsOnSuspend</key>
+    <false/>
     <key>UILaunchImages</key>
     <array>
       <dict>

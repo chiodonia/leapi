@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no' />
+	<title>Le api</title>
+<style>
+
+    body {
+        width: 768px;
+        height: 1024px;
+        margin: 0px;
+        background-color: rgb(252, 252, 223);
+    }
+    
+    .full-screen {
+        width: 768px;
+        height: 1024px;
+        position: absolute;
+        z-index: 10;
+        cursor: pointer;
+    }
+    
+    #main-page {
+        width: 768px;
+        height: 1024px;
+        margin: 0px;
+        border: 0px;
+        background: url(img/loading.png) no-repeat transparent center top;
+        background-size: 100% 100%;
+    }
+    
+    button {
+        width: 104px;
+        height: 90px;
+        position:absolute;
+        margin: 0px;
+        border: 0px;
+        z-index: 20;
+    }
+    
+    button:focus {
+        outline:0 !important;
+    }
+    
+	#button-video-1 {
+        left:70px;
+        top:170px;
+        background: url(img/bu_1_on.png) no-repeat transparent center top;
+        background-size: 100% 100%;
+        cursor: pointer;
+	}
+
+    #button-video-1[playing] {
+        left:70px;
+        top:170px;
+        background: url(img/bu_1_on.png) no-repeat transparent center top;
+        background-size: 100% 100%;
+        cursor: progress;
+	}
+
+    #button-video-1:disabled {
+        background:url(img/bu_1_off.png) no-repeat;
+        background-size: 100% 100%;
+        cursor: default;
+	}
+    
+    #button-video-2 {
+        left:156px;
+        top:120px;
+        background: url(img/bu_2_on.png) no-repeat transparent center top;
+        background-size: 100% 100%;
+        cursor: pointer;
+	}
+
+    #button-video-2[playing] {
+        left:156px;
+        top:120px;
+        background: url(img/bu_2_on.png) no-repeat transparent center top;
+        background-size: 100% 100%;
+        cursor: progress;
+	}
+
+    #button-video-2:disabled {
+        background:url(img/bu_2_off.png) no-repeat;
+        background-size: 100% 100%;
+        cursor: default;
+	}
+
+    #button-video-3 {
+        left:242px;
+        top:70px;
+        background: url(img/bu_3_on.png) no-repeat transparent center top;
+        background-size: 100% 100%;
+        cursor: pointer;
+	}
+    
+    #button-video-3[playing] {
+        left:242px;
+        top:70px;
+        background: url(img/bu_3_on.png) no-repeat transparent center top;
+        background-size: 100% 100%;
+        cursor: progress;
+	}
+    
+    #button-video-3:disabled {
+        background:url(img/bu_3_off.png) no-repeat;
+        background-size: 100% 100%;
+        cursor: default;
+	}
+
+    #button-video-4 {
+        left:330px;
+        top:20px;
+        background: url(img/bu_4_on.png) no-repeat transparent center top;
+        background-size: 100% 100%;
+        cursor: pointer;
+	}
+
+    #button-video-4[playing] {
+        left:330px;
+        top:20px;
+        background: url(img/bu_4_on.png) no-repeat transparent center top;
+        background-size: 100% 100%;
+        cursor: progress;
+	}
+    
+    #button-video-4:disabled {
+        background:url(img/bu_4_off.png) no-repeat;
+        background-size: 100% 100%;
+        cursor: default;
+	}
+
+    #button-video-5 {
+        left:414px;
+        top:70px;
+        background: url(img/bu_5_on.png) no-repeat transparent center top;
+        background-size: 100% 100%;
+        cursor: pointer;
+	}
+
+    #button-video-5[playing] {
+        left:414px;
+        top:70px;
+        background: url(img/bu_5_on.png) no-repeat transparent center top;
+        background-size: 100% 100%;
+        cursor: progress;
+	}
+    
+    #button-video-5:disabled {
+        background:url(img/bu_5_off.png) no-repeat;
+        background-size: 100% 100%;
+        cursor: default;
+	}
+
+    #button-video-6 {
+        left:499px;
+        top:120px;
+        background: url(img/bu_6_on.png) no-repeat transparent center top;
+        background-size: 100% 100%;
+        cursor: pointer;
+	}
+
+    #button-video-6[playing] {
+        left:499px;
+        top:120px;
+        background: url(img/bu_6_on.png) no-repeat transparent center top;
+        background-size: 100% 100%;
+        cursor: progress;
+	}
+
+    #button-video-6:disabled {
+        background:url(img/bu_6_off.png) no-repeat;
+        background-size: 100% 100%;
+        cursor: default;
+	}
+    
+    #button-video-7 {
+        left:584px;
+        top:170px;
+        background: url(img/bu_7_on.png) no-repeat transparent center top;
+        background-size: 100% 100%;
+        cursor: pointer;
+	}
+
+    #button-video-7[playing] {
+        left:584px;
+        top:170px;
+        background: url(img/bu_7_on.png) no-repeat transparent center top;
+        background-size: 100% 100%;
+        cursor: progress;
+	}
+    
+    #button-video-7:disabled {
+        background:url(img/bu_7_off.png) no-repeat;
+        background-size: 100% 100%;
+        cursor: default;
+	}
+
+	#button-home {
+        left:10px;
+        top:10px;
+        width: 60px;
+        height: 60px;
+        background: url(img/bu_home.png) no-repeat transparent center top;
+        background-size: 100% 100%;
+	}
+
+	#button-tutorial {
+        left:698px;
+        top:10px;
+        width: 60px;
+        height: 60px;
+        background: url(img/bu_tutorial.png) no-repeat transparent center top;
+        background-size: 100% 100%;
+	}
+
+	video {
+        left: 0px;
+        top: 0px;        
+        width: 768px;
+        height: 1024px;
+        position: absolute;
+        background-size: cover;
+        z-index: 1;
+	}
+
+</style>
+</head>
+<body>
+    <div id="pages">
+        <div id="home-page">
+            <img id='home' src='img/home.png' class='full-screen'>
+        </div>
+        <div id="tutorial-page">
+            <img id='tutorial' src='img/tuto_1.png' class='full-screen'>
+        </div>
+        <div id="main-page">
+            <button id='button-home'></button>
+            <button id='button-tutorial'></button>
+            <div id="buttons-videos">
+                <button id='button-video-1'></button>
+                <button id='button-video-2'></button>
+                <button id='button-video-3'></button>
+                <button id='button-video-4'></button>
+                <button id='button-video-5'></button>
+                <button id='button-video-6'></button>
+                <button id='button-video-7'></button>
+            </div>
+        </div>
+        <div id="video"></div>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>   
+    <script src="js/jquery.min.js"></script>
+    <!--
+    <script src="js/hammer.min.js"></script>
+    <script src="js/jquery.hammer.js"></script>
+    -->
+	<script>
+
+		$(function() {
+
+            var step = 1;
+
+            $('#home').on('click', function() {
+                startTutorial();
+            });
+            
+            $('#tutorial').on('click', function() {
+                step++;
+                tutorial(step);
+            });
+            
+            $('#button-home').click(function() {
+                home();
+            });
+            
+            $('#button-tutorial').click(function() {
+                startTutorial();
+            });
+
+            $('#buttons-videos').delegate('button', 'click', function() {
+                var v = $(this).index()+1;
+                if (!$('#button-video-'+v).attr('playing')) {
+                    var buttons = $('#buttons-videos button').length;
+                    for (var b = 1; b <= buttons; b++) {
+                        if (b == v) {
+                            $('#button-video-'+b).attr('playing', true);
+                        } else {
+                            $('#button-video-'+b).prop('disabled', true);
+                        }
+                    }
+                    playVideo(v);
+                }
+            });
+
+            function startTutorial() {
+                hideVideo();
+                step = 1;
+                tutorial(step);
+            }
+
+            function startMainPage(playVideo) {
+                $('#tutorial-page').hide();
+                $('#home-page').hide();
+                $('#buttons-videos button').prop('disabled', false);
+                $('#buttons-videos button').removeAttr('playing');
+                $('#main-page').show();
+                if (playVideo) {
+                    playMainVideo();
+                }
+            }
+            
+            function tutorial(s) {
+                if (step > 6) {
+                    startMainPage(false);
+                } else {
+                    $('#tutorial').attr('src', 'img/tuto_'+s+'.png');
+                    if (s > 5) {
+                        playMainVideo();
+                    }
+                    if (s==1) {
+                        $('#home-page').hide();
+                        $('#main-page').hide();
+                        $('#tutorial-page').show();
+                    }
+                }
+            }
+            
+            function home() {
+                hideVideo();
+                $('#main-page').hide();
+                $('#tutorial-page').hide();
+                $('#home-page').show();
+            }
+
+            function hideVideo() {
+                $('#video').html("");
+            }
+            
+            function playMainVideo() {
+                var html = "<video preload='true' autoplay loop>" +
+                        "<source src='video/video_0.mp4' type='video/mp4'>" +
+                        "Your browser does not support the video tag." +
+                        "</video>";
+                $('#video').html(html);
+            }
+            
+            function playVideo(v) {
+                var html = "<video preload='true' autoplay>" +
+                        "<source src='video/video_"+v+".mp4' type='video/mp4'>" +
+                        "Your browser does not support the video tag." +
+                        "</video>";
+                $('#video').html(html);
+                $('#video video').bind("ended", function() {
+                    $('#video video').bind('click', function(event) {
+                        startMainPage(true);
+                    });
+                });                    
+            }
+
+            home();
+
+		});
+
+	</script>
+</body>
+</html>
