@@ -13,23 +13,18 @@
         height: 1024px;
         margin: 0px;
         background-color: rgb(252, 252, 223);
+        background-image: url("img/loading.png");
+        background-size: 768px 1024px;
+        background-repeat: no-repeat;
+        cursor: pointer;
     }
-    
+
     .full-screen {
         width: 768px;
         height: 1024px;
         position: absolute;
         z-index: 10;
         cursor: pointer;
-    }
-    
-    #main-page {
-        width: 768px;
-        height: 1024px;
-        margin: 0px;
-        border: 0px;
-        background: url(img/loading.png) no-repeat transparent center top;
-        background-size: 100% 100%;
     }
     
     button {
@@ -46,16 +41,16 @@
     }
     
 	#button-video-1 {
-        left:70px;
-        top:170px;
+        left:75px;
+        top:175px;
         background: url(img/bu_1_on.png) no-repeat transparent center top;
         background-size: 100% 100%;
         cursor: pointer;
 	}
 
     #button-video-1[playing] {
-        left:70px;
-        top:170px;
+        left:75px;
+        top:175px;
         background: url(img/bu_1_on.png) no-repeat transparent center top;
         background-size: 100% 100%;
         cursor: progress;
@@ -68,16 +63,16 @@
 	}
     
     #button-video-2 {
-        left:156px;
-        top:120px;
+        left:160px;
+        top:128px;
         background: url(img/bu_2_on.png) no-repeat transparent center top;
         background-size: 100% 100%;
         cursor: pointer;
 	}
 
     #button-video-2[playing] {
-        left:156px;
-        top:120px;
+        left:160px;
+        top:128px;
         background: url(img/bu_2_on.png) no-repeat transparent center top;
         background-size: 100% 100%;
         cursor: progress;
@@ -90,16 +85,16 @@
 	}
 
     #button-video-3 {
-        left:242px;
-        top:70px;
+        left:247px;
+        top:75px;
         background: url(img/bu_3_on.png) no-repeat transparent center top;
         background-size: 100% 100%;
         cursor: pointer;
 	}
     
     #button-video-3[playing] {
-        left:242px;
-        top:70px;
+        left:247px;
+        top:75px;
         background: url(img/bu_3_on.png) no-repeat transparent center top;
         background-size: 100% 100%;
         cursor: progress;
@@ -112,16 +107,16 @@
 	}
 
     #button-video-4 {
-        left:330px;
-        top:20px;
+        left:335px;
+        top:25px;
         background: url(img/bu_4_on.png) no-repeat transparent center top;
         background-size: 100% 100%;
         cursor: pointer;
 	}
 
     #button-video-4[playing] {
-        left:330px;
-        top:20px;
+        left:335px;
+        top:25px;
         background: url(img/bu_4_on.png) no-repeat transparent center top;
         background-size: 100% 100%;
         cursor: progress;
@@ -134,16 +129,16 @@
 	}
 
     #button-video-5 {
-        left:414px;
-        top:70px;
+        left:417px;
+        top:75px;
         background: url(img/bu_5_on.png) no-repeat transparent center top;
         background-size: 100% 100%;
         cursor: pointer;
 	}
 
     #button-video-5[playing] {
-        left:414px;
-        top:70px;
+        left:417px;
+        top:75px;
         background: url(img/bu_5_on.png) no-repeat transparent center top;
         background-size: 100% 100%;
         cursor: progress;
@@ -156,16 +151,16 @@
 	}
 
     #button-video-6 {
-        left:499px;
-        top:120px;
+        left:502px;
+        top:125px;
         background: url(img/bu_6_on.png) no-repeat transparent center top;
         background-size: 100% 100%;
         cursor: pointer;
 	}
 
     #button-video-6[playing] {
-        left:499px;
-        top:120px;
+        left:502px;
+        top:125px;
         background: url(img/bu_6_on.png) no-repeat transparent center top;
         background-size: 100% 100%;
         cursor: progress;
@@ -178,16 +173,16 @@
 	}
     
     #button-video-7 {
-        left:584px;
-        top:170px;
+        left:589px;
+        top:175px;
         background: url(img/bu_7_on.png) no-repeat transparent center top;
         background-size: 100% 100%;
         cursor: pointer;
 	}
 
     #button-video-7[playing] {
-        left:584px;
-        top:170px;
+        left:589px;
+        top:175px;
         background: url(img/bu_7_on.png) no-repeat transparent center top;
         background-size: 100% 100%;
         cursor: progress;
@@ -200,8 +195,8 @@
 	}
 
 	#button-home {
-        left:10px;
-        top:10px;
+        left:30px;
+        top:30px;
         width: 60px;
         height: 60px;
         background: url(img/bu_home.png) no-repeat transparent center top;
@@ -209,8 +204,8 @@
 	}
 
 	#button-tutorial {
-        left:698px;
-        top:10px;
+        left:675px;
+        top:30px;
         width: 60px;
         height: 60px;
         background: url(img/bu_tutorial.png) no-repeat transparent center top;
@@ -230,17 +225,12 @@
 </style>
 </head>
 <body>
-    <div id="pages">
-        <div id="home-page">
-            <img id='home' src='img/home.png' class='full-screen'>
-        </div>
-        <div id="tutorial-page">
-            <img id='tutorial' src='img/tuto_1.png' class='full-screen'>
-        </div>
-        <div id="main-page">
+    <div id="page">
+        <img id='background' src='img/home.png' class='full-screen'>
+        <div id="controls" style="display:none;">
             <button id='button-home'></button>
             <button id='button-tutorial'></button>
-            <div id="buttons-videos">
+            <div id="video-controls">
                 <button id='button-video-1'></button>
                 <button id='button-video-2'></button>
                 <button id='button-video-3'></button>
@@ -250,7 +240,10 @@
                 <button id='button-video-7'></button>
             </div>
         </div>
-        <div id="video"></div>
+        <video id="video" preload='true' style="display:none;">
+            <source src='video/video_0.mp4' type='video/mp4'>
+        </video>
+        </div>
     </div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
@@ -266,15 +259,17 @@
 
 		$(function() {
 
-            var step = 1;
+            var page = 0;
 
-            $('#home').on('click', function() {
-                startTutorial();
-            });
-            
-            $('#tutorial').on('click', function() {
-                step++;
-                tutorial(step);
+            $('#background').on('click', function() {
+                if (page < 7) {
+                    if (page == 0) {
+                        startTutorial();
+                    } else {
+                        page++;
+                        tutorial();
+                    }
+                }
             });
             
             $('#button-home').click(function() {
@@ -285,10 +280,11 @@
                 startTutorial();
             });
 
-            $('#buttons-videos').delegate('button', 'click', function() {
+            $('#video-controls').delegate('button', 'click', function() {
                 var v = $(this).index()+1;
+                playVideo(v);
                 if (!$('#button-video-'+v).attr('playing')) {
-                    var buttons = $('#buttons-videos button').length;
+                    var buttons = $('#video-controls button').length;
                     for (var b = 1; b <= buttons; b++) {
                         if (b == v) {
                             $('#button-video-'+b).attr('playing', true);
@@ -296,76 +292,69 @@
                             $('#button-video-'+b).prop('disabled', true);
                         }
                     }
-                    playVideo(v);
                 }
             });
 
-            function startTutorial() {
+            function home() {
+                $('#background').attr('src', 'img/home.png');
+                $('#background').show();
+                $('#controls').hide();
                 hideVideo();
-                step = 1;
-                tutorial(step);
+                page = 0;
             }
 
+            function startTutorial() {
+                $('#controls').hide();
+                hideVideo();
+                page = 1;
+                tutorial();
+                $('#background').show();
+            }
+
+            function tutorial() {
+                if (page > 6) {
+                    startMainPage(false);
+                } else {
+                    $('#background').attr('src', 'img/tuto_'+page+'.png');
+                    if (page > 5) {
+                        playMainVideo();
+                    }
+                }
+            }
+            
             function startMainPage(playVideo) {
-                $('#tutorial-page').hide();
-                $('#home-page').hide();
-                $('#buttons-videos button').prop('disabled', false);
-                $('#buttons-videos button').removeAttr('playing');
-                $('#main-page').show();
+                $('#video-controls button').prop('disabled', false);
+                $('#video-controls button').removeAttr('playing');
+                $('#background').hide();
+                $('#controls').show();
                 if (playVideo) {
                     playMainVideo();
                 }
             }
             
-            function tutorial(s) {
-                if (step > 6) {
-                    startMainPage(false);
-                } else {
-                    $('#tutorial').attr('src', 'img/tuto_'+s+'.png');
-                    if (s > 5) {
-                        playMainVideo();
-                    }
-                    if (s==1) {
-                        $('#home-page').hide();
-                        $('#main-page').hide();
-                        $('#tutorial-page').show();
-                    }
-                }
-            }
-            
-            function home() {
-                hideVideo();
-                $('#main-page').hide();
-                $('#tutorial-page').hide();
-                $('#home-page').show();
-            }
-
             function hideVideo() {
-                $('#video').html("");
+                $('#video').get(0).pause();
+                $('#video').hide();
             }
             
             function playMainVideo() {
-                var html = "<video preload='true' autoplay loop>" +
-                        "<source src='video/video_0.mp4' type='video/mp4'>" +
-                        "Your browser does not support the video tag." +
-                        "</video>";
-                $('#video').html(html);
+                $('#video').attr('src', 'video/video_0.mp4');
+                $('#video').attr('loop', 'true');
+                $('#video').unbind('click');
+                $('#video').show();
+                $('#video').get(0).play();
             }
             
             function playVideo(v) {
-                var html = "<video preload='true' autoplay>" +
-                        "<source src='video/video_"+v+".mp4' type='video/mp4'>" +
-                        "Your browser does not support the video tag." +
-                        "</video>";
-                $('#video').html(html);
-                $('#video video').bind("ended", function() {
-                    $('#video video').bind('click', function(event) {
+                $('#video').attr('src', 'video/video_'+v+'.mp4');
+                $('#video').removeAttr('loop');
+                $('#video').get(0).play();
+                $('#video').bind("ended", function() {
+                    $('#video').bind('click', function(event) {
                         startMainPage(true);
                     });
                 });                    
             }
-
-            home();
 
 		});
 

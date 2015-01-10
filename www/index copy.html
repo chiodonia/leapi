@@ -19,6 +19,9 @@
         cursor: pointer;
     }
 
+    .body-background {
+    }
+
     .full-screen {
         width: 768px;
         height: 1024px;
@@ -240,9 +243,10 @@
                 <button id='button-video-7'></button>
             </div>
         </div>
-        <video id="video" preload='true' style="display:none;">
-            <source src='video/video_0.mp4' type='video/mp4'>
-        </video>
+        <div id="video" style="display:none;">
+            <video preload='true'>
+                <source src='video/video_0.mp4' type='video/mp4'>
+            </video>
         </div>
     </div>
     <script type="text/javascript" src="cordova.js"></script>
@@ -282,7 +286,6 @@
 
             $('#video-controls').delegate('button', 'click', function() {
                 var v = $(this).index()+1;
-                playVideo(v);
                 if (!$('#button-video-'+v).attr('playing')) {
                     var buttons = $('#video-controls button').length;
                     for (var b = 1; b <= buttons; b++) {
@@ -292,10 +295,12 @@
                             $('#button-video-'+b).prop('disabled', true);
                         }
                     }
+                    playVideo(v);
                 }
             });
 
             function home() {
+//                $('body').removeClass('body-background');
                 $('#background').attr('src', 'img/home.png');
                 $('#background').show();
                 $('#controls').hide();
@@ -304,6 +309,7 @@
             }
 
             function startTutorial() {
+//                $('body').removeClass('body-background');
                 $('#controls').hide();
                 hideVideo();
                 page = 1;
@@ -323,6 +329,7 @@
             }
             
             function startMainPage(playVideo) {
+//                $('body').addClass('body-background');
                 $('#video-controls button').prop('disabled', false);
                 $('#video-controls button').removeAttr('playing');
                 $('#background').hide();
@@ -333,24 +340,25 @@
             }
             
             function hideVideo() {
-                $('#video').get(0).pause();
+                $('#video video').get(0).pause();
                 $('#video').hide();
             }
             
             function playMainVideo() {
-                $('#video').attr('src', 'video/video_0.mp4');
-                $('#video').attr('loop', 'true');
-                $('#video').unbind('click');
+                $('#video video').attr('src', 'video/video_0.mp4');
+                $('#video video').attr('loop', 'true');
+                $('#video video').unbind('click');
                 $('#video').show();
-                $('#video').get(0).play();
+                $('#video video').get(0).play();
             }
             
             function playVideo(v) {
-                $('#video').attr('src', 'video/video_'+v+'.mp4');
-                $('#video').removeAttr('loop');
-                $('#video').get(0).play();
-                $('#video').bind("ended", function() {
-                    $('#video').bind('click', function(event) {
+                $('#video video').attr('src', 'video/video_'+v+'.mp4');
+                $('#video video').removeAttr('loop');
+                $('#video').show();
+                $('#video video').get(0).play();
+                $('#video video').bind("ended", function() {
+                    $('#video video').bind('click', function(event) {
                         startMainPage(true);
                     });
                 });                    
