@@ -338,23 +338,31 @@
             }
             
             function playMainVideo() {
-                $('#video').attr('src', 'video/video_0.mp4');
-                $('#video').attr('loop', 'true');
-                $('#video').unbind('click');
-                $('#video').show();
-                $('#video').get(0).play();
+                $('#video').fadeTo('fast', 0, function() {
+                    $('#video').attr('src', 'video/video_0.mp4');
+                    $('#video').fadeTo('fast', 1, function() {
+                        $('#video').attr('loop', 'true');
+                        $('#video').unbind('click');
+                        $('#video').show();
+                        $('#video').get(0).play();
+                    });
+                });
             }
             
             function playVideo(v) {
-                $('#video').attr('src', 'video/video_'+v+'.mp4');
-                $('#video').removeAttr('loop');
-                $('#video').get(0).play();
-                $('#video').bind("ended", function() {
-                    $('#video').bind('click', function(event) {
-                        startMainPage(true);
+                $('#video').fadeTo('fast', 0, function() {
+                    $('#video').attr('src', 'video/video_'+v+'.mp4');
+                    $('#video').fadeTo('fast', 1, function() {
+                        $('#video').removeAttr('loop');
+                        $('#video').get(0).play();
+                        $('#video').bind("ended", function() {
+                            $('#video').bind('click', function(event) {
+                                startMainPage(true);
+                            });
+                        });                    
                     });
-                });                    
-            }
+                });
+             }
 
 		});
 
