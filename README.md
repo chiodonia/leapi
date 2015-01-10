@@ -1,5 +1,11 @@
 # Le api
 
+Idea e design:
+Luca Menghini
+
+Programmazione:
+Andrea Chiodoni
+
 ## Creazione 
 ```
 git init
