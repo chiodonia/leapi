@@ -115,6 +115,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:CDVLocalNotification object:notification];
 }
 
+/*
 - (void)                                 application:(UIApplication*)application
     didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
@@ -126,13 +127,16 @@
 
     [[NSNotificationCenter defaultCenter] postNotificationName:CDVRemoteNotification object:token];
 }
+ */
 
+/*
 - (void)                                 application:(UIApplication*)application
     didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
     // re-post ( broadcast )
     [[NSNotificationCenter defaultCenter] postNotificationName:CDVRemoteNotificationError object:error];
 }
+ */
 
 - (NSUInteger)application:(UIApplication*)application supportedInterfaceOrientationsForWindow:(UIWindow*)window
 {
